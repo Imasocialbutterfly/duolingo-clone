@@ -88,6 +88,12 @@ export const Quiz = ({
   const onContinue = () => {
     if (!selectedOption) return;
 
+    if (status === "wrong") {
+      setStatus("none");
+      setSelectedOption(undefined);
+      return;
+    }
+
     if (status === "correct") {
       onNext();
       setStatus("none");
