@@ -14,7 +14,7 @@ export const Header = ({
   percentage,
   hasActiveSubscription,
 }: Props) => {
-  const { open } = useExitModal()
+  const { open } = useExitModal();
 
   return (
     <header className="lg:pt-[50px] pt=[20px] px-10 flex gap-x-7 items-center justify-between max-w-[1140px] mx-auto w-full">
@@ -24,17 +24,18 @@ export const Header = ({
       />
       <Progress value={percentage} />
       <div className="text-rose-500 flex items-center font-bold">
-        <Image 
-            src="/heart.svg"
-            height={20}
-            width={28}
-            alt="Heart"
-            className="mr-2"
+        <Image
+          src="/heart.svg"
+          height={20}
+          width={28}
+          alt="Heart"
+          className="mr-2"
         />
-        {hasActiveSubscription
-            ? <InfinityIcon className="h-6 w-6 stroke=[3]"/>
-            : hearts
-        }
+        {hasActiveSubscription ? (
+          <InfinityIcon className="h-6 w-6 stroke=[3] shrink-0" />
+        ) : (
+          hearts
+        )}
       </div>
     </header>
   );

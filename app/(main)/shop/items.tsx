@@ -1,13 +1,12 @@
 "use client";
 
-import { refilHearts } from "@/actions/user-progress";
+import { refillHearts } from "@/actions/user-progress";
 import { createStripeUrl } from "@/actions/user-subscription";
 import { Button } from "@/components/ui/button";
+import { POINTS_TO_REFILL } from "@/constants";
 import Image from "next/image";
 import { useTransition } from "react";
 import { toast } from "sonner";
-
-const POINTS_TO_REFILL = 10;
 
 type Props = {
   hearts: number;
@@ -18,13 +17,13 @@ type Props = {
 export const Items = ({ hearts, points, hasActiveSubscription }: Props) => {
   const [pending, startTransition] = useTransition();
 
-  const onRefilHearts = () => {
+  const onRefillHearts = () => {
     if (pending || hearts === 5 || points < POINTS_TO_REFILL) {
       return;
     }
 
     startTransition(() => {
-      refilHearts().catch(() => toast.error("Something went wrong"));
+      refillHearts().catch(() => toast.error("Something went wrong"));
     });
   };
 
@@ -36,7 +35,7 @@ export const Items = ({ hearts, points, hasActiveSubscription }: Props) => {
             window.location.href = response.data;
           }
         })
-        .catch(() => toast.error("Something wen wrong"));
+        .catch(() => toast.error("Something went wrong"));
     });
   };
 
@@ -50,7 +49,7 @@ export const Items = ({ hearts, points, hasActiveSubscription }: Props) => {
           </p>
         </div>
         <Button
-          onClick={onRefilHearts}
+          onClick={onRefillHearts}
           disabled={pending || hearts === 5 || points < POINTS_TO_REFILL}
         >
           {hearts === 5 ? (
